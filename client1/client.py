@@ -2,9 +2,8 @@ import net
 import threading
 
 def main():
-    listen_thread = threading.Thread(net.listen())
+    connection = net.Net("127.0.0.1")
 
-    # write game code after hererucit
 
 
 main()

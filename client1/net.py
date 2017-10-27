@@ -1,12 +1,22 @@
 import socket, pickle
 
 
+def open_connection(server, TCP_IP):
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.connect((TCP_IP, 4000))
+
+    return server
+
 class Net:
     server = None
 
+    def __init__(self, TCP_IP):
+        server = open_connection(self.server, TCP_IP)
+
+
     def listen(self):
         while True:
-            data = server.recv(1024)
+            data = self.server.recv(1024)
             data = pickle.loads(data)
 
             print data
@@ -15,11 +25,6 @@ class Net:
         data = pickle.dumps(data)
         self.server.send(data)
 
-
-    def open_connection(self):
-        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server.connect(('127.0.0.', 4000))
-        
     def close_connection(self):
         self.server.close()
 
