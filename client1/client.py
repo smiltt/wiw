@@ -4,6 +4,6 @@ import threading
 def main():
     connection = net.Net("127.0.0.1")
 
-
+    # add game code
 
 main()
