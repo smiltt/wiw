@@ -1,29 +1,28 @@
 import socket, pickle
 
 
+class Net:
+    server = None
 
-def listen():
-    while True:
-        send_msg("Hello")
+    def listen(self):
+        while True:
+            data = server.recv(1024)
+            data = pickle.loads(data)
 
-def send():
-    pass
+            print data
 
-
-
-
-
-def send_msg(msg):
+    def send_data(self, data):
+        data = pickle.dumps(data)
+        self.server.send(data)
 
 
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.connect(('127.0.0.1', 4000))
+    def open_connection(self):
+        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server.connect(('127.0.0.', 4000))te a
 
-    data = "I'm logged"
-    data = pickle.dumps(data)
-    server.send(data)
-    data = server.recv(1024)
-    data = pickle.loads(data)
-    print(data)
+    def close_connection(self):
+        self.server.close()
 
-    server.close()
+
+
+
