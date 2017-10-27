@@ -18,8 +18,8 @@ class Net:
 
     def open_connection(self):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server.connect(('127.0.0.', 4000))te a
-
+        self.server.connect(('127.0.0.', 4000))
+        
     def close_connection(self):
         self.server.close()
 
