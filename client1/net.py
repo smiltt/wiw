@@ -1,4 +1,5 @@
 import socket, pickle
+import client
 
 
 def open_connection(server, TCP_IP):
@@ -6,6 +7,12 @@ def open_connection(server, TCP_IP):
     server.connect((TCP_IP, 4000))
 
     return server
+
+def updateVars(data):
+    
+
+    client.x = # some x val
+
 
 class Net:
     server = None
@@ -19,7 +26,8 @@ class Net:
             data = self.server.recv(1024)
             data = pickle.loads(data)
 
-            print data
+            updateVars(data)
+
 
     def send_data(self, data):
         data = pickle.dumps(data)
