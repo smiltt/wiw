@@ -56,6 +56,9 @@ class Player(Object):
     shield_rot = 0
     image_frame = 0
 
+    width = 80
+    height = 120
+
     def __init__(self, image_path):
         super(Player, self).__init__
         self.set_image(image_path)
@@ -76,7 +79,7 @@ class Player(Object):
         self.vy += self.ay * delta_t
 
     def set_image(self, image_path):
-        self.image = pygame.image.load(image_path)
+        self.image = pygame.transform.scale(pygame.image.load(image_path),(self.width, self.height))
 
     def get_image(self):
         return self.image
