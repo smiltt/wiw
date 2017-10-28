@@ -1,4 +1,4 @@
-import pygame
+import pygame, math
 
 class Object(object):
     def __init__(self, x = 0, y = 0):
@@ -73,10 +73,15 @@ class Player(Object):
         self.image_frame += 1
 
     def update(self, delta_t):
+        #self.ax = -0.3 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vx
+        #self.ay = -0.3 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vy
+
         self.x += self.vx * delta_t
         self.y += self.vy * delta_t
         self.vx += self.ax * delta_t
         self.vy += self.ay * delta_t
+
+
 
     def set_image(self, image_path):
         self.image = pygame.transform.scale(pygame.image.load(image_path),(self.width, self.height))
