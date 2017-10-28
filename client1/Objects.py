@@ -1,7 +1,7 @@
 class Object(object):
-    def __init__(self):
-        self.x = 0
-        self.y = 0
+    def __init__(self, x = 0, y = 0):
+        self.x = x
+        self.y = y
         self.vx = 0
         self.vy = 0
         self.health = 10
@@ -13,6 +13,8 @@ class Object(object):
     y = 0
     vx = 0
     vy = 0
+    ax = 0
+    ay = 0
 
     health = 10
 
@@ -38,11 +40,16 @@ class Object(object):
         self.health = health
 
     def intersects(self, obj):
-        return false
+        return False
+
+    def update(self, delta_t):
+        pass
+
 
 class Player(Object):
 
     shield_rot = 0
+    image_frame = 0
 
     def __init__(self):
         super(Player, self).__init__()
@@ -52,6 +59,15 @@ class Player(Object):
 
     def get_shield_rotation(self):
         return self.shield_rot
+
+    def update_frame(self):
+        self.image_frame += 1
+
+    def update(self, delta_t):
+        self.x += self.vx * delta_t
+        self.y += self.vy * delta_t
+        self.vx += self.ax * delta_t
+        self.vy += self.ay * delta_t
 
 
 
