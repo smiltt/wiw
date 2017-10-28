@@ -44,7 +44,7 @@ class Object(object):
 
     def intersects(self, obj):
         if (
-                        self.getX() < obj.getX() + obj.width and self.getY() + self.height > obj.getY() and self.getY() < obj.getY() + obj.height and self.getY() + self.height > obj.getY()):
+                        self.getX() < obj.getX() + obj.width and self.getX() + self.width > obj.getX() and self.getY() < obj.getY() + obj.height and self.getY() + self.height > obj.getY()):
             return True
         return False
 
@@ -87,8 +87,8 @@ class Player(Object):
 
     rotation = 0
 
-    width = 120
-    height = 120
+    width = 32
+    height = 32
 
     def __init__(self):
         super(Player, self).__init__
@@ -156,7 +156,7 @@ class Player(Object):
         return self.image
 
     def get_rect(self):
-        return pygame.Rect((self.x, self.y), (self.width, self.height))
+        return pygame.Rect((self.x, self.y), (self.width + 64, self.height + 64))
 
     def update_rotation(self):
         if self.vx == 0 and self.vy > 0:

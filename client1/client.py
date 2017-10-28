@@ -53,7 +53,7 @@ class Game:
         pygame.init()
         self.current_image = 0
         self.image_count = 15
-        self.walls.append(Objects.Wall(0,50,200,10))
+        self.walls.append(Objects.Wall(0,0,200,10))
         self.walls.append(Objects.Wall(200,50,232,15))
         self.level = Map(16, 16)
         self.screen = pygame.display.set_mode((self.level.get_height() * 32, self.level.get_width() * 32))
@@ -138,6 +138,7 @@ class Game:
                 if self.player.intersects(wall):
                     self.player.de_update(delta_t)
                     print ("collided")
+                    print (self.player.getY())
                     break
 
             for obj in self.gameObjects:
