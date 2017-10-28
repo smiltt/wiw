@@ -52,10 +52,28 @@ class Object(object):
         return
 
 
+class Wall(Object):
+    x=0
+    y=0
+    width=0
+    height=0
+
+    def __init__(self, x=0,y=0,width=0,height=0):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def get_rect(self):
+        return (self.x,self.y,self.width,self.height)
+
+
+
 class Player(Object):
     image = None
     shield_rot = 0
     image_frame = 0
+    mov_speed = 1
 
     width = 120
     height = 120
@@ -86,6 +104,24 @@ class Player(Object):
     def set_player_rotation(self, ):
         return
 
+    def set_mov_speed(self, val):
+        self.mov_speed = val
+
+    def get_vx(self):
+        return self.vx
+
+    def get_vy(self):
+        return self.vy
+
+    def set_vx(self, vx):
+        self.vx = vx
+
+    def set_vy(self, vy):
+        self.vy = vy
+
+    def get_move_speed(self):
+        return self.mov_speed
+
     def get_shield_rotation(self):
         return self.shield_rot
 
@@ -100,11 +136,6 @@ class Player(Object):
 
         self.x += self.vx * delta_t
         self.y += self.vy * delta_t
-        self.vx += self.ax * delta_t ** 2
-        self.vy += self.ay * delta_t ** 2
-
-        self.ax = -0.2 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vx
-        self.ay = -0.2 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vy
 
     def set_image(self,no):
         self.image = pygame.transform.scale((self.images[self.current_image]), (self.width, self.height))

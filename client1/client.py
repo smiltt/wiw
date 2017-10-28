@@ -9,24 +9,49 @@ class Game:
     gameObjects = []
     t = time.time()
     level = None
+    walls = []
+
 
     def handle_keypress(self):
         pressed = pygame.key.get_pressed()
 
-        if pressed[pygame.K_UP]:
-            self.player.vy = 1
-        elif pressed[pygame.K_DOWN]:
-            self.player.vy = -1
-        if pressed[pygame.K_RIGHT]:
-            self.player.vx = -1
-        elif pressed[pygame.K_LEFT]:
-            self.player.vx = 1
+        if pressed[pygame.K_SPACE]:
+            self.player.set_mov_speed(2.5)
+        else:
+            self.player.set_mov_speed(1)
 
+        if pressed[pygame.K_UP]:
+            self.player.vy = self.player.get_move_speed()
+        elif pressed[pygame.K_DOWN]:
+            self.player.vy = -self.player.get_move_speed()
+        else:
+            self.player.vy = 0
+        if pressed[pygame.K_RIGHT]:
+            self.player.vx = -self.player.get_move_speed()
+        elif pressed[pygame.K_LEFT]:
+            self.player.vx = self.player.get_move_speed()
+        else:
+            self.player.vx = 0
+        if (self.player.vx != 0 and self.player.vy != 0):
+            self.player.vx = self.player.vx * 0.7
+            self.player.vy = self.player.vy * 0.7
+
+
+        if pressed[pygame.K_w]:
+            pass
+        if pressed[pygame.K_a]:
+            pass
+        if pressed[pygame.K_s]:
+            pass
+        if pressed[pygame.K_d]:
+            pass
 
     def __init__(self):
         pygame.init()
         self.current_image = 0
         self.image_count = 15
+        self.walls.append(Objects.Wall(0,50,200,10))
+        self.walls.append(Objects.Wall(200,50,232,15))
         self.level = Map(16, 16)
         self.screen = pygame.display.set_mode((self.level.get_height() * 32, self.level.get_width() * 32))
         self.player = Objects.Player([self.current_image])
@@ -52,13 +77,19 @@ class Game:
     def draw(self):
         self.draw_map()
         self.current_image += 1
-        print(self.image_count)
+        self.draw_walls()
+        #print(self.image_count)
         if self.current_image >= self.image_count:
             self.current_image=0
-        print(self.current_image)
+        #print(self.current_image)
         self.screen.blit(self.images[self.current_image], self.player.get_rect())
         pygame.display.set_caption("Women in white")
         pygame.display.flip()
+
+    def draw_walls(self):
+        for wall in self.walls:
+            pygame.draw.rect(self.screen, (0,0,0), pygame.Rect(wall.get_rect()))
+
 
     def draw_map(self):
         tile = pygame.image.load('res/tile.png')
