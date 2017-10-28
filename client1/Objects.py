@@ -57,15 +57,22 @@ class Wall(Object):
     y=0
     width=0
     height=0
+    color = (0,0,0)
 
-    def __init__(self, x=0,y=0,width=0,height=0):
+    def __init__(self, x=0,y=0,width=0,height=0, color = (0,0,0)):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
+        self.color = color
 
     def get_rect(self):
         return (self.x,self.y,self.width,self.height)
+
+    def get_color(self):
+        return self.color
+
+    
 
 
 

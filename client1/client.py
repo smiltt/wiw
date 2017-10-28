@@ -10,6 +10,9 @@ class Game:
     t = time.time()
     level = None
     walls = []
+    images = []
+    player_time = 0
+    player_anim_frame = 0
 
 
     def handle_keypress(self):
@@ -74,10 +77,26 @@ class Game:
 
         #pygame.display.set_mode((1080, 720))
 
+    def draw_player(self):
+        if (self.player.get_vx() != 0 || self.player.get_vy() != 0):
+            if (time.time() - self.player_time) / 10 > 0.4:
+                self.player_anim_frame += 1
+                self.player_time = time.time()
+                if self.player_anim_frame > self.image_count:
+                    self.player_anim_frame = 0
+        else:
+            self.player_anim_frame = 0
+
+        image = self.player_walk_images[self.player_anim_frame]
+        self.screen.blit(self.images[self.current_image], self.player.get_rect())
+
+
+
     def draw(self):
         self.draw_map()
         self.current_image += 1
         self.draw_walls()
+        self.draw_player()
         #print(self.image_count)
         if self.current_image >= self.image_count:
             self.current_image=0
@@ -88,7 +107,7 @@ class Game:
 
     def draw_walls(self):
         for wall in self.walls:
-            pygame.draw.rect(self.screen, (0,0,0), pygame.Rect(wall.get_rect()))
+            pygame.draw.rect(self.screen, wall.get_color(), pygame.Rect(wall.get_rect()))
 
 
     def draw_map(self):
