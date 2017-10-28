@@ -61,7 +61,16 @@ class Player(Object):
 
     def __init__(self, image_path):
         super(Player, self).__init__
-        self.set_image(image_path)
+        images = [pygame.image.load("res/sprite1/Man in Black00.png"), pygame.image.load("res/sprite1/Man in Black01.png"),
+                   pygame.image.load("res/sprite1/Man in Black02.png"), pygame.image.load("res/sprite1/Man in Black03.png"),
+                   pygame.image.load("res/sprite1/Man in Black04.png"), pygame.image.load("res/sprite1/Man in Black05.png"),
+                   pygame.image.load("res/sprite1/Man in Black06.png"), pygame.image.load("res/sprite1/Man in Black07.png"),
+                   pygame.image.load("res/sprite1/Man in Black08.png"), pygame.image.load("res/sprite1/Man in Black09.png"),
+                   pygame.image.load("res/sprite1/Man in Black10.png"), pygame.image.load("res/sprite1/Man in Black11.png"),
+                   pygame.image.load("res/sprite1/Man in Black12.png"), pygame.image.load("res/sprite1/Man in Black13.png"),
+                   pygame.image.load("res/sprite1/Man in Black14.png"), pygame.image.load("res/sprite1/Man in Black15.png")]
+        self.current_image = images[0]
+        self.set_image(self.current_image)
 
     def set_shield_rotation(self, rotation):
         self.shield_rot = rotation
@@ -91,7 +100,8 @@ class Player(Object):
         self.ay = -0.2 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vy
 
     def set_image(self, image_path):
-        self.image = pygame.transform.scale(pygame.image.load(image_path),(self.width, self.height))
+
+        self.image = pygame.transform.scale((self.current_image), (self.width, self.height))
 
     def get_image(self):
         return self.image

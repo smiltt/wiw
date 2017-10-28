@@ -25,16 +25,17 @@ class Game:
 
     def __init__(self):
         pygame.init()
-
+        self.current_image = 0
         self.level = Map(16, 16)
         self.screen = pygame.display.set_mode((self.level.get_height() * 32, self.level.get_width() * 32))
-        self.player = Objects.Player('res/sprite1/Man In Black00.png')
+        self.player = Objects.Player([self.current_image])
 
         #pygame.display.set_mode((1080, 720))
 
     def draw(self):
         self.draw_map()
         self.screen.blit(self.player.get_image(), self.player.get_rect())
+        pygame.display.set_caption("Women in white")
         pygame.display.flip()
 
     def draw_map(self):
@@ -54,8 +55,6 @@ class Game:
 
             self.handle_keypress()
 
-
-
             delta_t = (self.t - time.time()) * 10 ** (2)
             self.t = time.time()
             self.player.update(delta_t)
@@ -63,7 +62,6 @@ class Game:
                 obj.update(delta_t)
 
             self.draw()
-
 
 
 def int(xp, yp, posx, posy):
@@ -75,7 +73,6 @@ def int(xp, yp, posx, posy):
     for i in posx:
         for n in posy:
             screen.blit(tyle, (posx(i), posy(n)))
-
 
 
 def main():
