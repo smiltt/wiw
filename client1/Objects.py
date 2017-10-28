@@ -85,6 +85,8 @@ class Player(Object):
     image_frame = 0
     mov_speed = 1
 
+    rotation = 0
+
     width = 120
     height = 120
 
@@ -113,8 +115,6 @@ class Player(Object):
     def set_shield_rotation(self, rotation):
         self.shield_rot = rotation
 
-    def set_player_rotation(self, ):
-        return
 
     def set_mov_speed(self, val):
         self.mov_speed = val
@@ -157,6 +157,28 @@ class Player(Object):
 
     def get_rect(self):
         return pygame.Rect((self.x, self.y), (self.width, self.height))
+
+    def update_rotation(self):
+        if self.vx == 0 and self.vy > 0:
+            self.rotation = 0
+        elif self.vx == self.vy and self.vx > 0:
+            self.rotation = 1
+        elif self.vx > 0 and self.vy == 0:
+            self.rotation = 2
+        elif self.vx > 0 and self.vy < 0:
+            self.rotation = 3
+        elif self.vx == 0 and self.vy < 0:
+            self.rotation = 4
+        elif self.vx < 0 and self.vy < 0:
+            self.rotation = 5
+        elif self.vx < 0 and self.vy == 0:
+            self.rotation = 6
+        elif self.vx < 0 and self.vy > 0:
+            self.rotation = 7
+
+
+    def get_rotation(self):
+        return self.rotation
 
 
 class Alien(Object):

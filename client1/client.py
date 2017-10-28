@@ -80,7 +80,6 @@ class Game:
     def draw_player(self):
         if (self.player.get_vx() != 0 or self.player.get_vy() != 0):
             if (time.time() - self.player_time) > 0.02:
-                print ("wtf")
                 self.player_anim_frame += 1
                 self.player_time = time.time()
                 if self.player_anim_frame > self.image_count:
@@ -90,13 +89,9 @@ class Game:
 
         image = self.images[self.player_anim_frame]
 
-        if (self.player.getX() != 0 or self.player.getY() != 0):
-            if self.player.get_vy() == 0 and self.player.get_vx() == 1:
-                image = pygame.transform.rotate(image, 90)
-            if self.player.get_vy() == -1 and self.player.get_vx() == 0:
-                image = pygame.transform.rotate(image, 180)
-            if self.player.get_vy() == 0 and self.player.get_vx() == -1:
-                image = pygame.transform.rotate(image, 270)
+        self.player.update_rotation()
+
+        image = pygame.transform.rotate(image, self.player.get_rotation() * 45)
 
         self.screen.blit(image, self.player.get_rect())
 
@@ -107,11 +102,7 @@ class Game:
         self.current_image += 1
         self.draw_walls()
         self.draw_player()
-        #print(self.image_count)
-        #if self.current_image >= self.image_count:
-            #self.current_image=0
-        #print(self.current_image)
-        #self.screen.blit(self.images[self.], self.player.get_rect())
+
         pygame.display.set_caption("Women in white")
         pygame.display.flip()
 
