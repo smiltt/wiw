@@ -26,15 +26,37 @@ class Game:
     def __init__(self):
         pygame.init()
         self.current_image = 0
+        self.image_count = 15
         self.level = Map(16, 16)
         self.screen = pygame.display.set_mode((self.level.get_height() * 32, self.level.get_width() * 32))
         self.player = Objects.Player([self.current_image])
+        self.images = [pygame.image.load("res/sprite1/mib00.png"),
+                  pygame.image.load("res/sprite1/mib01.png"),
+                  pygame.image.load("res/sprite1/mib02.png"),
+                  pygame.image.load("res/sprite1/mib03.png"),
+                  pygame.image.load("res/sprite1/mib04.png"),
+                  pygame.image.load("res/sprite1/mib05.png"),
+                  pygame.image.load("res/sprite1/mib06.png"),
+                  pygame.image.load("res/sprite1/mib07.png"),
+                  pygame.image.load("res/sprite1/mib08.png"),
+                  pygame.image.load("res/sprite1/mib09.png"),
+                  pygame.image.load("res/sprite1/mib10.png"),
+                  pygame.image.load("res/sprite1/mib11.png"),
+                  pygame.image.load("res/sprite1/mib12.png"),
+                  pygame.image.load("res/sprite1/mib13.png"),
+                  pygame.image.load("res/sprite1/mib14.png"),
+                  pygame.image.load("res/sprite1/mib15.png")]
 
         #pygame.display.set_mode((1080, 720))
 
     def draw(self):
         self.draw_map()
-        self.screen.blit(self.player.get_image(), self.player.get_rect())
+        self.current_image += 1
+        print(self.image_count)
+        if self.current_image >= self.image_count:
+            self.current_image=0
+        print(self.current_image)
+        self.screen.blit(self.images[self.current_image], self.player.get_rect())
         pygame.display.set_caption("Women in white")
         pygame.display.flip()
 

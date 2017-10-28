@@ -59,28 +59,27 @@ class Player(Object):
 
     width = 120
     height = 120
-
     def __init__(self, image_path):
         super(Player, self).__init__
-        images = [pygame.image.load("res/sprite1/mib00.png"),
+        self.images = [pygame.image.load("res/sprite1/mib00.png"),
                   pygame.image.load("res/sprite1/mib01.png"),
-                  pygame.image.load("./res/sprite1/mib02.png"),
-                  pygame.image.load("./res/sprite1/mib03.png"),
-                  pygame.image.load("./res/sprite1/mib04.png"),
-                  pygame.image.load("./res/sprite1/mib05.png"),
-                  pygame.image.load("./res/sprite1/mib06.png"),
-                  pygame.image.load("./res/sprite1/mib07.png"),
-                  pygame.image.load("./res/sprite1/mib08.png"),
-                  pygame.image.load("./res/sprite1/mib09.png"),
-                  pygame.image.load("./res/sprite1/mib10.png"),
-                  pygame.image.load("./res/sprite1/mib11.png"),
-                  pygame.image.load("./res/sprite1/mib12.png"),
-                  pygame.image.load("./res/sprite1/mib13.png"),
-                  pygame.image.load("./res/sprite1/mib14.png"),
-                  pygame.image.load("./res/sprite1/mib15.png")]
-        self.current_image = images[0]
-        self.set_image(self.current_image)
+                  pygame.image.load("res/sprite1/mib02.png"),
+                  pygame.image.load("res/sprite1/mib03.png"),
+                  pygame.image.load("res/sprite1/mib04.png"),
+                  pygame.image.load("res/sprite1/mib05.png"),
+                  pygame.image.load("res/sprite1/mib06.png"),
+                  pygame.image.load("res/sprite1/mib07.png"),
+                  pygame.image.load("res/sprite1/mib08.png"),
+                  pygame.image.load("res/sprite1/mib09.png"),
+                  pygame.image.load("res/sprite1/mib10.png"),
+                  pygame.image.load("res/sprite1/mib11.png"),
+                  pygame.image.load("res/sprite1/mib12.png"),
+                  pygame.image.load("res/sprite1/mib13.png"),
+                  pygame.image.load("res/sprite1/mib14.png"),
+                  pygame.image.load("res/sprite1/mib15.png")]
+        self.current_image = 0
 
+        self.image_count = len(self.images)
     def set_shield_rotation(self, rotation):
         self.shield_rot = rotation
 
@@ -107,11 +106,11 @@ class Player(Object):
         self.ax = -0.2 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vx
         self.ay = -0.2 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vy
 
-    def set_image(self, image_path):
-
-        self.image = pygame.transform.scale((self.current_image), (self.width, self.height))
+    def set_image(self,no):
+        self.image = pygame.transform.scale((self.images[self.current_image]), (self.width, self.height))
 
     def get_image(self):
+        self.set_image(self.images[self.current_image])
         return self.image
 
     def get_rect(self):
