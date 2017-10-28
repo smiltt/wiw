@@ -54,8 +54,6 @@ class Game:
 
             self.handle_keypress()
 
-
-
             delta_t = (self.t - time.time()) * 10 ** (2)
             self.t = time.time()
             self.player.update(delta_t)
@@ -63,18 +61,6 @@ class Game:
                 obj.update(delta_t)
 
             self.draw()
-
-
-
-def int(xp, yp, posx, posy):
-    screen = pygame.display.set_mode((1024, 768))
-    thing = pygame.image.load('alien4.png')
-    screen.blit(thing, (xp, yp))
-    pygame.display.flip()
-    tyle = pygame.image.load('tile.png')
-    for i in posx:
-        for n in posy:
-            screen.blit(tyle, (posx(i), posy(n)))
 
 
 
