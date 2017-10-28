@@ -8,8 +8,8 @@ class Object(object):
         self.vy = 0
         self.health = 10
 
-        self.width = 10
-        self.height = 30
+        self.width = 32
+        self.height = 32
 
     x = 0
     y = 0
@@ -56,7 +56,7 @@ class Player(Object):
     shield_rot = 0
     image_frame = 0
 
-    width = 80
+    width = 120
     height = 120
 
     def __init__(self, image_path):
@@ -65,7 +65,8 @@ class Player(Object):
 
     def set_shield_rotation(self, rotation):
         self.shield_rot = rotation
-
+    def set_player_rotation(self,):
+        return
     def get_shield_rotation(self):
         return self.shield_rot
 
@@ -109,7 +110,6 @@ class Alien(Object):
 
     def fire(self):
         pass
-
 
 
 class Projectile(Object):

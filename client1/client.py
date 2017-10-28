@@ -69,7 +69,7 @@ class Game:
 def int(xp, yp, posx, posy):
     screen = pygame.display.set_mode((1024, 768))
     thing = pygame.image.load('alien4.png')
-    screen.blit(thing, (xp, yp))
+    screen.blit(thing, (10, 10))
     pygame.display.flip()
     tyle = pygame.image.load('tile.png')
     for i in posx:
