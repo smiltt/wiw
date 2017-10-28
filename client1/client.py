@@ -1,6 +1,6 @@
 import os, math, time, sys
 import pygame.locals
-from client1 import Objects
+import Objects
 
 class Game:
     running = True
