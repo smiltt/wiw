@@ -1,41 +1,33 @@
 import socket, pickle
-import client
+from client1 import player_data
 
 
-def open_connection(server, TCP_IP):
+conn = None
+
+def open_connection(TCP_IP):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.connect((TCP_IP, 4000))
-
+    server.connect((TCP_IP, 8000))
     return server
 
-def updateVars(data):
-    
 
-    client.x = # some x val
+def update_vars(data):
+    player_data.x, player_data.y = pickle.loads(data)
 
+def init(TCP_IP):
+    server = open_connection(TCP_IP)
+    conn = server
+    return conn
 
-class Net:
-    server = None
+def listen():
+    while True:
+        data = conn.recv(1024)
+        data = pickle.loads(data)
 
-    def __init__(self, TCP_IP):
-        server = open_connection(self.server, TCP_IP)
+        update_vars(data)
 
+def send_keypress(keyval):
+    data = pickle.dumps(keyval)
+    conn.send(data)
 
-    def listen(self):
-        while True:
-            data = self.server.recv(1024)
-            data = pickle.loads(data)
-
-            updateVars(data)
-
-
-    def send_data(self, data):
-        data = pickle.dumps(data)
-        self.server.send(data)
-
-    def close_connection(self):
-        self.server.close()
-
-
-
-
+def close_connection():
+    conn.close()
