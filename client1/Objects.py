@@ -1,7 +1,8 @@
 import pygame, math
 
+
 class Object(object):
-    def __init__(self, x = 0, y = 0):
+    def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
         self.vx = 0
@@ -61,21 +62,31 @@ class Player(Object):
 
     def __init__(self, image_path):
         super(Player, self).__init__
-        images = [pygame.image.load("res/sprite1/Man in Black00.png"), pygame.image.load("res/sprite1/Man in Black01.png"),
-                   pygame.image.load("res/sprite1/Man in Black02.png"), pygame.image.load("res/sprite1/Man in Black03.png"),
-                   pygame.image.load("res/sprite1/Man in Black04.png"), pygame.image.load("res/sprite1/Man in Black05.png"),
-                   pygame.image.load("res/sprite1/Man in Black06.png"), pygame.image.load("res/sprite1/Man in Black07.png"),
-                   pygame.image.load("res/sprite1/Man in Black08.png"), pygame.image.load("res/sprite1/Man in Black09.png"),
-                   pygame.image.load("res/sprite1/Man in Black10.png"), pygame.image.load("res/sprite1/Man in Black11.png"),
-                   pygame.image.load("res/sprite1/Man in Black12.png"), pygame.image.load("res/sprite1/Man in Black13.png"),
-                   pygame.image.load("res/sprite1/Man in Black14.png"), pygame.image.load("res/sprite1/Man in Black15.png")]
+        images = [pygame.image.load("res/sprite1/mib00.png"),
+                  pygame.image.load("res/sprite1/mib01.png"),
+                  pygame.image.load("./res/sprite1/mib02.png"),
+                  pygame.image.load("./res/sprite1/mib03.png"),
+                  pygame.image.load("./res/sprite1/mib04.png"),
+                  pygame.image.load("./res/sprite1/mib05.png"),
+                  pygame.image.load("./res/sprite1/mib06.png"),
+                  pygame.image.load("./res/sprite1/mib07.png"),
+                  pygame.image.load("./res/sprite1/mib08.png"),
+                  pygame.image.load("./res/sprite1/mib09.png"),
+                  pygame.image.load("./res/sprite1/mib10.png"),
+                  pygame.image.load("./res/sprite1/mib11.png"),
+                  pygame.image.load("./res/sprite1/mib12.png"),
+                  pygame.image.load("./res/sprite1/mib13.png"),
+                  pygame.image.load("./res/sprite1/mib14.png"),
+                  pygame.image.load("./res/sprite1/mib15.png")]
         self.current_image = images[0]
         self.set_image(self.current_image)
 
     def set_shield_rotation(self, rotation):
         self.shield_rot = rotation
-    def set_player_rotation(self,):
+
+    def set_player_rotation(self, ):
         return
+
     def get_shield_rotation(self):
         return self.shield_rot
 
@@ -87,9 +98,6 @@ class Player(Object):
             self.vx = 0
         if math.fabs(self.vy) < 0.2:
             self.vy = 0
-
-
-
 
         self.x += self.vx * delta_t
         self.y += self.vy * delta_t
@@ -107,11 +115,10 @@ class Player(Object):
         return self.image
 
     def get_rect(self):
-        return pygame.Rect((self.x,self.y), (self.width, self.height))
+        return pygame.Rect((self.x, self.y), (self.width, self.height))
 
 
 class Alien(Object):
-
     gun_damage = 5
 
     def __init__(self, gun_dmg):
