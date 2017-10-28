@@ -1,3 +1,5 @@
+import pygame
+
 class Object(object):
     def __init__(self, x = 0, y = 0):
         self.x = x
@@ -45,14 +47,18 @@ class Object(object):
     def update(self, delta_t):
         pass
 
+    def get_rect(self):
+        return
+
 
 class Player(Object):
-
+    image = None
     shield_rot = 0
     image_frame = 0
 
-    def __init__(self):
-        super(Player, self).__init__()
+    def __init__(self, image_path):
+        super(Player, self).__init__(
+        self.set_image(image_path)
 
     def set_shield_rotation(self, rotation):
         self.shield_rot = rotation
@@ -69,6 +75,14 @@ class Player(Object):
         self.vx += self.ax * delta_t
         self.vy += self.ay * delta_t
 
+    def set_image(self, image_path):
+        self.image = pygame.image.load(image_path)
+
+    def get_image(self):
+        return self.image
+
+    def get_rect(self):
+        return pygame.Rect((self.x,self.y), (self.width, self.height))
 
 
 class Alien(Object):
