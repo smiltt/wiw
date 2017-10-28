@@ -73,15 +73,21 @@ class Player(Object):
         self.image_frame += 1
 
     def update(self, delta_t):
-        #self.ax = -0.3 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vx
-        #self.ay = -0.3 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vy
+        if math.fabs(self.vx) < 0.2:
+            self.vx = 0
+        if math.fabs(self.vy) < 0.2:
+            self.vy = 0
+
+
+
 
         self.x += self.vx * delta_t
         self.y += self.vy * delta_t
-        self.vx += self.ax * delta_t
-        self.vy += self.ay * delta_t
+        self.vx += self.ax * delta_t ** 2
+        self.vy += self.ay * delta_t ** 2
 
-
+        self.ax = -0.2 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vx
+        self.ay = -0.2 * math.sqrt(self.vx ** 2 + self.vy ** 2) * self.vy
 
     def set_image(self, image_path):
         self.image = pygame.transform.scale(pygame.image.load(image_path),(self.width, self.height))

@@ -10,17 +10,17 @@ class Game:
     t = time.time()
     level = None
 
-    def handle_keypress(self, event):
-        print (event.key)
+    def handle_keypress(self):
+        pressed = pygame.key.get_pressed()
 
-        if event.key == pygame.K_UP:
+        if pressed[pygame.K_UP]:
             self.player.vy = 1
-        elif event.key == pygame.K_DOWN:
+        elif pressed[pygame.K_DOWN]:
             self.player.vy = -1
-        elif event.key == pygame.K_RIGHT:
-            self.player.vx = 1
-        elif event.key == pygame.K_LEFT:
+        if pressed[pygame.K_RIGHT]:
             self.player.vx = -1
+        elif pressed[pygame.K_LEFT]:
+            self.player.vx = 1
 
 
     def __init__(self):
@@ -49,10 +49,12 @@ class Game:
 
         while self.running:
             for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    self.handle_keypress(event)
-                elif event.type == pygame.QUIT:
+                if event.type == pygame.QUIT:
                     sys.exit(0)
+
+            self.handle_keypress()
+
+
 
             delta_t = (self.t - time.time()) * 10 ** (2)
             self.t = time.time()
