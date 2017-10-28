@@ -57,7 +57,7 @@ class Player(Object):
     image_frame = 0
 
     def __init__(self, image_path):
-        super(Player, self).__init__(
+        super(Player, self).__init__
         self.set_image(image_path)
 
     def set_shield_rotation(self, rotation):
