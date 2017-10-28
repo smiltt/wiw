@@ -43,6 +43,9 @@ class Object(object):
         self.health = health
 
     def intersects(self, obj):
+        if (
+                        self.getX() < obj.getX() + obj.width and self.getY() + self.height > obj.getY() and self.getY() < obj.getY() + obj.height and self.getY() + self.height > obj.getY()):
+            return True
         return False
 
     def update(self, delta_t):
@@ -51,15 +54,18 @@ class Object(object):
     def get_rect(self):
         return
 
+    def get(self):
+        return self
+
 
 class Wall(Object):
-    x=0
-    y=0
-    width=0
-    height=0
-    color = (0,0,0)
+    x = 0
+    y = 0
+    width = 0
+    height = 0
+    color = (0, 0, 0)
 
-    def __init__(self, x=0,y=0,width=0,height=0, color = (0,0,0)):
+    def __init__(self, x=0, y=0, width=0, height=0, color=(0, 0, 0)):
         self.x = x
         self.y = y
         self.width = width
@@ -67,13 +73,10 @@ class Wall(Object):
         self.color = color
 
     def get_rect(self):
-        return (self.x,self.y,self.width,self.height)
+        return (self.x, self.y, self.width, self.height)
 
     def get_color(self):
         return self.color
-
-    
-
 
 
 class Player(Object):
@@ -84,27 +87,29 @@ class Player(Object):
 
     width = 120
     height = 120
-    def __init__(self, image_path):
+
+    def __init__(self):
         super(Player, self).__init__
         self.images = [pygame.image.load("res/sprite1/mib00.png"),
-                  pygame.image.load("res/sprite1/mib01.png"),
-                  pygame.image.load("res/sprite1/mib02.png"),
-                  pygame.image.load("res/sprite1/mib03.png"),
-                  pygame.image.load("res/sprite1/mib04.png"),
-                  pygame.image.load("res/sprite1/mib05.png"),
-                  pygame.image.load("res/sprite1/mib06.png"),
-                  pygame.image.load("res/sprite1/mib07.png"),
-                  pygame.image.load("res/sprite1/mib08.png"),
-                  pygame.image.load("res/sprite1/mib09.png"),
-                  pygame.image.load("res/sprite1/mib10.png"),
-                  pygame.image.load("res/sprite1/mib11.png"),
-                  pygame.image.load("res/sprite1/mib12.png"),
-                  pygame.image.load("res/sprite1/mib13.png"),
-                  pygame.image.load("res/sprite1/mib14.png"),
-                  pygame.image.load("res/sprite1/mib15.png")]
+                       pygame.image.load("res/sprite1/mib01.png"),
+                       pygame.image.load("res/sprite1/mib02.png"),
+                       pygame.image.load("res/sprite1/mib03.png"),
+                       pygame.image.load("res/sprite1/mib04.png"),
+                       pygame.image.load("res/sprite1/mib05.png"),
+                       pygame.image.load("res/sprite1/mib06.png"),
+                       pygame.image.load("res/sprite1/mib07.png"),
+                       pygame.image.load("res/sprite1/mib08.png"),
+                       pygame.image.load("res/sprite1/mib09.png"),
+                       pygame.image.load("res/sprite1/mib10.png"),
+                       pygame.image.load("res/sprite1/mib11.png"),
+                       pygame.image.load("res/sprite1/mib12.png"),
+                       pygame.image.load("res/sprite1/mib13.png"),
+                       pygame.image.load("res/sprite1/mib14.png"),
+                       pygame.image.load("res/sprite1/mib15.png")]
         self.current_image = 0
 
         self.image_count = len(self.images)
+
     def set_shield_rotation(self, rotation):
         self.shield_rot = rotation
 
@@ -136,15 +141,14 @@ class Player(Object):
         self.image_frame += 1
 
     def update(self, delta_t):
-        if math.fabs(self.vx) < 0.2:
-            self.vx = 0
-        if math.fabs(self.vy) < 0.2:
-            self.vy = 0
-
         self.x += self.vx * delta_t
         self.y += self.vy * delta_t
 
-    def set_image(self,no):
+    def de_update(self, delta_t):
+        self.x -= self.vx * delta_t
+        self.y -= self.vy * delta_t
+
+    def set_image(self, no):
         self.image = pygame.transform.scale((self.images[self.current_image]), (self.width, self.height))
 
     def get_image(self):
